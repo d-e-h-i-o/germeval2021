@@ -11,14 +11,14 @@ from sklearn.metrics import classification_report
 from transformers import AutoTokenizer, Trainer, TrainingArguments, AutoModelForSequenceClassification, \
     EarlyStoppingCallback, set_seed
 
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = '0'
+# os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+# os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 
 
 def load_datasets():
     # load dataset
-    df_train = pd.read_csv('../../dataset/GermEval21_Toxic_Train.csv', index_col=0)
-    df_test = pd.read_csv('../../dataset/GermEval21_Toxic_TestData.csv', index_col=0)
+    df_train = pd.read_csv('./GermEval21_Toxic_Train.csv', index_col=0)
+    df_test = pd.read_csv('./GermEval21_Toxic_TestData.csv', index_col=0)
 
     # set column and index names
     df_train.rename(columns={'comment_text': 'text',
@@ -151,7 +151,7 @@ def calc_f1_score_germeval(ly_true, ly_pred):
 if __name__ == '__main__':
     # relevant inputs
     model_count = 30
-    model_names = ['gbert', 'gelectra']
+    model_names = ['gbert']
     # model_names = ['gbert', 'gelectra', 'gottbert']
 
     df_train, df_test = load_datasets()
@@ -161,7 +161,7 @@ if __name__ == '__main__':
 
     predicted_labels = {}
 
-    for i_label, label in enumerate(["toxic", "engaging", "fact"]):
+    for i_label, label in enumerate(["fact"]):
         predictions_test = []
 
         for i, model_name in enumerate(model_names):
