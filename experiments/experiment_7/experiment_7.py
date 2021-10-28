@@ -17,8 +17,8 @@ from transformers import AutoTokenizer, Trainer, TrainingArguments, AutoModelFor
 
 def load_datasets():
     # load dataset
-    df_train = pd.read_csv('./GermEval21_Toxic_Train.csv', index_col=0)
-    df_test = pd.read_csv('./GermEval21_Toxic_TestData.csv', index_col=0)
+    df_train = pd.read_csv('../../dataset/GermEval21_Toxic_Train.csv', index_col=0)
+    df_test = pd.read_csv('../../dataset/GermEval21_Toxic_TestData.csv', index_col=0)
 
     # set column and index names
     df_train.rename(columns={'comment_text': 'text',
