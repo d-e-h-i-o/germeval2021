@@ -198,7 +198,8 @@ if __name__ == '__main__':
                                                   evaluation_strategy='steps',
                                                   seed=i * 100 + k,
                                                   learning_rate=5e-5,
-                                                  warmup_ratio=0.3)
+                                                  warmup_ratio=0.3,
+                                                  save_steps=400)
 
                 model = None
                 try:
