@@ -241,16 +241,11 @@ if __name__ == '__main__':
 
         predicted_labels[label] = y_pred
 
-    df_test['Sub1_Toxic'] = predicted_labels['toxic']
-    df_test['Sub2_Engaging'] = predicted_labels['engaging']
     df_test['Sub3_FactClaiming'] = predicted_labels['fact']
     df_test = df_test.drop(columns=['text', 'toxic', 'engaging', 'fact'])
     df_test.index.rename('comment_id', inplace=True)
     df_test.to_csv('results/answer.csv')
 
     with open('results/scores.txt', 'w') as f:
-        f.write(f'F1 score for class toxic: {calc_f1_score_germeval(y_test[:, 0], predicted_labels["toxic"])}\n')
-        f.write(f'F1 score for class engaging: {calc_f1_score_germeval(y_test[:, 1], predicted_labels["engaging"])}\n')
         f.write(f'F1 score for class fact-claiming: {calc_f1_score_germeval(y_test[:, 2], predicted_labels["fact"])}\n')
-        y_pred_all = np.c_[predicted_labels["toxic"], predicted_labels["engaging"], predicted_labels["fact"]]
-        f.write(f'macro F1 score: {calc_f1_score_germeval(y_test, y_pred_all)}\n')
+      
