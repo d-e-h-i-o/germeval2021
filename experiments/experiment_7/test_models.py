@@ -233,7 +233,7 @@ if __name__ == '__main__':
                 logits = trainer.predict(dataset_test).predictions
                 softmax = torch.nn.Softmax(dim=1)
                 pred = softmax(torch.tensor(logits)).detach().cpu().numpy()
-                y_pred = np.argmax(y_pred_proba, axis=-1)
+                y_pred = np.argmax(pred, axis=-1)
                 current_score = calc_f1_score_germeval(y_test[:, 2], y_pred)
                 if best_model == None or current_score > best_score:
                     best_model = hash
@@ -245,10 +245,6 @@ if __name__ == '__main__':
                 else:
                     predictions_test = predictions_test + pred
 
-        y_pred_proba = predictions_test / (model_count * len(model_names))
-        y_pred = np.argmax(y_pred_proba, axis=-1)
-
-        predicted_labels[label] = y_pred
 
     print('results: ')
     print(best_score)
