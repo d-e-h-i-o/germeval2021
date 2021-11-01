@@ -154,7 +154,7 @@ if __name__ == '__main__':
     model_names = ['gbert']
     # model_names = ['gbert', 'gelectra', 'gottbert']
     best_model = None
-    best_score
+    best_score = None
 
     df_train, df_test = load_datasets()
     df_train = clean_up_comments(df_train)
